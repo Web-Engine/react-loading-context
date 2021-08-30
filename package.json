@@ -1,0 +1,34 @@
+{
+  "name": "@gsts007/react-loading-context",
+  "version": "0.1.0",
+  "description": "React Loading Context",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Web-Engine/react-loading-context.git"
+  },
+  "keywords": [
+    "react",
+    "load",
+    "loading",
+    "context"
+  ],
+  "author": "Taesang Cho <gsts007@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Web-Engine/react-loading-context/issues"
+  },
+  "homepage": "https://github.com/Web-Engine/react-loading-context#readme",
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.19",
+    "react": "^17.0.2",
+    "typescript": "^4.4.2"
+  }
+}
