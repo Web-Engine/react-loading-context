@@ -1,9 +1,9 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 type LoadingContextType = {
   counter: number;
-  start: () => void;
-  stop: () => void;
+  increase: () => void;
+  decrease: () => void;
 };
 
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
@@ -11,25 +11,30 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 export const LoadingContextProvider: React.FC = ({ children }) => {
   const [counter, setCounter] = useState<number>(0);
 
-  const start = useCallback(() => {
+  const increase = useCallback(() => {
     setCounter((counter) => counter + 1);
   }, [setCounter]);
 
-  const stop = useCallback(() => {
+  const decrease = useCallback(() => {
     setCounter((counter) => counter - 1);
   }, [setCounter]);
 
-  return <LoadingContext.Provider value={{ counter, start, stop }}>{children}</LoadingContext.Provider>;
+  return <LoadingContext.Provider value={{ counter, increase, decrease }}>{children}</LoadingContext.Provider>;
 };
 
 export const useLoadingAction = () => {
-  const { start, stop } = useContext(LoadingContext)!;
+  const [loading, setLoading] = useState<boolean>(false);
+  useAutoLoading(loading);
 
-  return { start, stop };
+  const start = useCallback(() => setLoading(true), [setLoading]);
+  const stop = useCallback(() => setLoading(false), [setLoading]);
+  const toggle = useCallback(() => setLoading((loading) => !loading), [setLoading]);
+
+  return { start, stop, toggle };
 };
 
 export const useAutoLoading = (loading: boolean) => {
-  const { start, stop } = useLoadingAction();
+  const { increase: start, decrease: stop } = useContext(LoadingContext)!;
 
   useEffect(() => {
     if (!loading) return;
