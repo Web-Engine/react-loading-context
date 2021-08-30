@@ -1,6 +1,6 @@
 {
   "name": "@gsts007/react-loading-context",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "React Loading Context",
   "main": "dist/index.js",
   "scripts": {
